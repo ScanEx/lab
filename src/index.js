@@ -3,8 +3,18 @@ import './index.css';
 import L from 'leaflet';
 
 async function getFeatures() {    
+    
+  /* 
+    const first = await fetch('/layer');  
+    const tbuf = first.toString('utf8');
+    const tjson = JSON.stringify(tbuf);
+    const rows = await tjson.json();
+    console.log()
+*/
+
     const response = await fetch('/layer');
     const rows = await response.json();
+
     return rows.map(({geojson, sceneid}) => {
         return {type: 'Feature', geometry: geojson, properties: {sceneid}};
     });

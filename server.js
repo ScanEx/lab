@@ -4,14 +4,21 @@ const fastify = require('fastify')({
 
 const path = require('path');
 
-const rows = require('./ls8.json');
+
+//const rows = require('./ls8.json');
+
+const rows = require('./ls81.json');
+const trows = JSON.stringify(rows);
+const buf = Buffer.from(trows);
+
 
 fastify.register(require('fastify-static'), {
     root: path.join(__dirname, 'public'),    
 });
 
 fastify.get('/layer', (req, res) => {
-    return rows;
+    return buf;
+    //return rows;
 });
   
 const start = async () => {
