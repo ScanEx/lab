@@ -4,17 +4,18 @@ import L from 'leaflet';
 
 async function getFeatures() {    
     
-  /* 
-    const first = await fetch('/layer');  
-    const tbuf = first.toString('utf8');
-    const tjson = JSON.stringify(tbuf);
-    const rows = await tjson.json();
-    console.log()
-*/
-
-    const response = await fetch('/layer');
+    const arr = await fetch('/layer');
+    var j = 0;
+    var js = [];
+    while(j < arr.length)
+    {
+        const obj = {sceneid: arr[j], geojson: arr[j+1]};
+        js.push(obj);
+        j=j+1;
+    }
+    const response = JSON.stringify(js);
+    //  сonst response = await fetch('/layer');
     const rows = await response.json();
-
     return rows.map(({geojson, sceneid}) => {
         return {type: 'Feature', geometry: geojson, properties: {sceneid}};
     });
