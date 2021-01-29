@@ -4,18 +4,32 @@ import L from 'leaflet';
 
 async function getFeatures() {    
     
+    /*
     const arr = await fetch('/layer');
+    const jsr = await arr.json();
     var j = 0;
     var js = [];
-    while(j < arr.length)
+    while(j > arr.length)
     {
         const obj = {sceneid: arr[j], geojson: arr[j+1]};
         js.push(obj);
-        j=j+1;
+        j=j+2;
     }
     const response = JSON.stringify(js);
-    //  сonst response = await fetch('/layer');
-    const rows = await response.json();
+    */
+    //const rows = await arr.json();
+    const response = await fetch('/layer');
+    const jsr = await response.json();
+    var j = 0;
+    var js = [];
+    while(j < jsr.length)
+    {
+        const obj = {sceneid: jsr[j], geojson: jsr[j+1]};
+        js.push(obj);
+        j=j+2;
+    }
+    const respond = js;
+    const rows = respond;
     return rows.map(({geojson, sceneid}) => {
         return {type: 'Feature', geometry: geojson, properties: {sceneid}};
     });

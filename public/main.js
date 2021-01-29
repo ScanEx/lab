@@ -16399,7 +16399,7 @@
 	  window.L = exports;
 
 	})));
-
+	//# sourceMappingURL=leaflet-src.js.map
 	});
 
 	function getFeatures() {
@@ -16408,7 +16408,7 @@
 
 	function _getFeatures() {
 	  _getFeatures = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-	    var response, rows;
+	    var response, jsr, j, js, obj, respond, rows;
 	    return regeneratorRuntime.wrap(function _callee2$(_context2) {
 	      while (1) {
 	        switch (_context2.prev = _context2.next) {
@@ -16422,7 +16422,21 @@
 	            return response.json();
 
 	          case 5:
-	            rows = _context2.sent;
+	            jsr = _context2.sent;
+	            j = 0;
+	            js = [];
+
+	            while (j < jsr.length) {
+	              obj = {
+	                sceneid: jsr[j],
+	                geojson: jsr[j + 1]
+	              };
+	              js.push(obj);
+	              j = j + 2;
+	            }
+
+	            respond = js;
+	            rows = respond;
 	            return _context2.abrupt("return", rows.map(function (_ref2) {
 	              var geojson = _ref2.geojson,
 	                  sceneid = _ref2.sceneid;
@@ -16435,7 +16449,7 @@
 	              };
 	            }));
 
-	          case 7:
+	          case 12:
 	          case "end":
 	            return _context2.stop();
 	        }
